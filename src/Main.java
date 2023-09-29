@@ -22,7 +22,7 @@ public class Main {
         }
 
         //OrdenamientoGen.insertionSort(miArray);
-    Ordenamiento.mergeSort(miArray, miArray.size());
+        Ordenamiento.mergeSort(miArray, miArray.size());
         System.out.println("array ordenado");
 
         for(int i : miArray){
