@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OrdenamientoGen {
@@ -63,18 +64,19 @@ public class OrdenamientoGen {
         }
 
         int mid = n / 2;
-       // int[] l = new int[mid];
-        int[] r = new int[n - mid];
     
-     
+        List left = new ArrayList<>();
+        List right = new ArrayList<>();
        
 
         for (int i = 0; i < mid; i++) {
-            l[i] = a[i];
+            left.set(i, miArray.get(i));
         }
         for (int i = mid; i < n; i++) {
             r[i - mid] = a[i];
+            right.set(i - mid, miArray.get(i));
         }
+        ////
         mergeSort(l, mid);
         mergeSort(r, n - mid);
     
