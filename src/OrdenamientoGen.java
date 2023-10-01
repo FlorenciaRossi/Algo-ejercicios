@@ -1,9 +1,9 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class OrdenamientoGen {
     
+//---BUBBLE SORT--------------------------------------------------------------
     public static <T extends Comparable<T>> void bubbleSort( List<T> miArray){
 
         T temporal;
@@ -23,7 +23,7 @@ public class OrdenamientoGen {
 
     }
     
-
+//---SELECTION SORT--------------------------------------------------------------
     public static <T extends Comparable<T>> void selectionSort( List<T> miArray){
 
         for (int i = 0; i < miArray.size() - 1; i++) {  
@@ -41,7 +41,7 @@ public class OrdenamientoGen {
         }  
     }
 
-
+//---INSERTION SORT--------------------------------------------------------------
     public static <T extends Comparable<T>> void insertionSort( List<T> miArray){
     
         for (int j = 1; j < miArray.size(); j++) { 
@@ -58,6 +58,7 @@ public class OrdenamientoGen {
 
     }
 
+//---MERGE SORT-------------------------------------------------------------------
     public static <T extends Comparable<T>> void mergeSort( List<T> miArray, int n) {
         if (n < 2) {
             return;
@@ -65,41 +66,72 @@ public class OrdenamientoGen {
 
         int mid = n / 2;
     
-        List left = new ArrayList<>();
-        List right = new ArrayList<>();
+        List<T> left = new ArrayList<>();
+        List<T> right = new ArrayList<>();
        
-
         for (int i = 0; i < mid; i++) {
-            left.set(i, miArray.get(i));
+            left.add(i, miArray.get(i));
         }
         for (int i = mid; i < n; i++) {
-            r[i - mid] = a[i];
-            right.set(i - mid, miArray.get(i));
+            right.add(i - mid, miArray.get(i));
         }
-        ////
-        mergeSort(l, mid);
-        mergeSort(r, n - mid);
+       
+        mergeSort(left, mid);
+        mergeSort(right, n - mid);
     
-        merge(a, l, r, mid, n - mid);
+        merge(miArray, left, right, mid, n - mid);
     }
-    public static void merge(
-    int[] a, int[] l, int[] r, int left, int right) {
+    
+    public static <T extends Comparable<T>> void merge(List<T> miArray, List<T> left, List<T> right, int l, int r) {
  
-    int i = 0, j = 0, k = 0;
-    while (i < left && j < right) {
-        if (l[i] <= r[j]) {
-            a[k++] = l[i++];
-        }
-        else {
-            a[k++] = r[j++];
-        }
-    }
-    while (i < left) {
-        a[k++] = l[i++];
-    }
-    while (j < right) {
-        a[k++] = r[j++];
-    }
-}
+        int i = 0, j = 0, k = 0;
 
+        while (i < l && j < r) {
+            if (left.get(i).compareTo(right.get(j)) <= 0) {
+               miArray.set(k++, left.get(i++));
+            }
+        else {
+                miArray.set(k++, right.get(j++));
+        }
+    }
+        while (i < l) {
+            miArray.set(k++, left.get(i++));
+        }
+        while (j < r) {
+            miArray.set(k++, right.get(j++));
+        }
+    }
+
+
+//---QUICK SORT----------------------------------------------------------------------------------
+    public static <T extends Comparable<T>> void quickSort(List<T> miArray, int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(miArray, begin, end);
+    
+            quickSort(miArray, begin, partitionIndex-1);
+            quickSort(miArray, partitionIndex+1, end);
+        }
+    }
+
+    public static <T extends Comparable<T>> int partition(List<T> miArray, int begin, int end) {
+
+        T pivot = miArray.get(end);
+        int i = (begin-1);
+    
+        //arr[j] <= pivot
+        for (int j = begin; j < end; j++) {
+
+            if (miArray.get(j).compareTo(pivot) <= 0 ) {
+                i++;
+                T swapTemp = miArray.get(i);
+                miArray.set(i, miArray.get(j));
+                miArray.set(j, swapTemp);
+            }
+        }
+        
+        T swapTemp = miArray.get(i+1);
+        miArray.set(i+1, miArray.get(end));
+        miArray.set(end, swapTemp);
+        return i+1;
+    }
 }

@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 
 public class Main {
 
@@ -15,18 +12,20 @@ public class Main {
         miArray.add(20);
         miArray.add(7);
         miArray.add(12);
-
-        
+  
         for(int i : miArray){
             System.out.println(i );
         }
 
+        //OrdenamientoGen.bubbleSort(miArray);
+        //OrdenamientoGen.selectionSort(miArray);
         //OrdenamientoGen.insertionSort(miArray);
-        Ordenamiento.mergeSort(miArray, miArray.size());
-        System.out.println("array ordenado");
+        //OrdenamientoGen.mergeSort(miArray, miArray.size());
+        OrdenamientoGen.quickSort(miArray, 0, miArray.size() - 1);
+        System.out.println("array ordenado:");
 
         for(int i : miArray){
-            System.out.println(i );
+            System.out.println(i);
         }
     }
 
